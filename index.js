@@ -19,31 +19,31 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.get("/getIngredientes", async (req, res) => {
+app.get("/api/getIngredientes", async (req, res) => {
     const snapshot = await ingrediente.get();
     const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     res.send(list);
   });
 
-app.get("/getProductos", async (req, res) => {
+app.get("/api/getProductos", async (req, res) => {
     const snapshot = await producto.get();
     const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     res.send(list);
   });
 
-app.get("/getClientes", async (req, res) => {
+app.get("/api/getClientes", async (req, res) => {
     const snapshot = await cliente.get();
     const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     res.send(list);
   });
-app.get("/getPedidos", async (req, res) => {
+app.get("/api/getPedidos", async (req, res) => {
     const snapshot = await pedido.get();
     const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     res.send(list);
   });
 
 
-app.post("/postIngrediente", async(req,res)=> 
+app.post("/api/postIngrediente", async(req,res)=> 
 {
     const data = req.body
     console.log("Info Ingredientes ",data)
@@ -51,7 +51,7 @@ app.post("/postIngrediente", async(req,res)=>
     res.send({msg: "Ingrediente added"})
 })
 
-app.post("/postCliente", async(req,res)=> 
+app.post("/api/postCliente", async(req,res)=> 
 {
     const data = req.body
     const nit = data.NIT
@@ -75,7 +75,7 @@ app.post("/postCliente", async(req,res)=>
     res.send(respuesta)
 })
 
-app.get("/getIngrediente/:nombre", async (req, res) => {
+app.get("/api/getIngrediente/:nombre", async (req, res) => {
     var nombreIng =req.params.nombre 
     console.log('Nombre:', nombreIng)
     let query = ingrediente.where('Nombre', '==', nombreIng);
@@ -95,7 +95,7 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
 
-  app.get("/getCliente/:nit", async (req, res) => {
+  app.get("/api/getCliente/:nit", async (req, res) => {
     var nitCliente =req.params.nit 
     //var nombreCliente =req.params.nombre 
     console.log('Typeof nit: ',(typeof nitCliente));
@@ -117,7 +117,7 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
   
-  app.get("/getFamilia/:nombre", async (req, res) => {
+  app.get("/api/getFamilia/:nombre", async (req, res) => {
     var prd =req.params.nombre 
     
     let query = await familia.where('Nombre', '==', prd);
@@ -137,7 +137,7 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
 
-  app.get("/getProducto/Id/:id", async (req, res) => {
+  app.get("/api/getProducto/Id/:id", async (req, res) => {
     var prd =req.params.id 
     let respuesta = null;
     await producto.doc(prd).get().then(snapshot => {
@@ -156,7 +156,7 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
 
-  app.get("/getProducto/Nombre/:nombre", async (req, res) => {
+  app.get("/api/getProducto/Nombre/:nombre", async (req, res) => {
     var prd =req.params.nombre 
     
     let query = await producto.where('Nombre', '==', prd);
@@ -193,23 +193,23 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     "IdEmpleado":"ABCRl949N5aptvF0M7vt"
   }
 */ 
-app.post("/postPedido", async(req,res)=> 
+app.post("/api/postPedido", async(req,res)=> 
 {
-    //const data = req.body
+    const data = req.body
 
-    const data = {
-      "Fecha": "2019-01-02T10:12:04",
-      "Detalle": 
-      [
-        {
-          "IdProducto":"xHsRl949N5aptvF0M7vt",
-          "Cantidad":4
-        }
-      ],
-      "NombreCliente":"Lopez",
-      "NITCliente": 77777,
-      "IdEmpleado":"ABCRl949N5aptvF0M7vt"
-    }
+    // const data = {
+    //   "Fecha": "2019-01-02T10:12:04",
+    //   "Detalle": 
+    //   [
+    //     {
+    //       "IdProducto":"xHsRl949N5aptvF0M7vt",
+    //       "Cantidad":4
+    //     }
+    //   ],
+    //   "NombreCliente":"Lopez",
+    //   "NITCliente": 77777,
+    //   "IdEmpleado":"ABCRl949N5aptvF0M7vt"
+    // }
 
     //buscamos todos los productos de la lista
     var misProds = []
