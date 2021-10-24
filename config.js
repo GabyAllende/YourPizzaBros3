@@ -1,6 +1,9 @@
 
 const firebase = require('firebase')
+const firestore = require('firebase/firestore')
 
+
+//mport { collection, query, where, getDocs } from "firebase/firestore";
 //YPB3
 // Import the functions you need from the SDKs you need
 //import { initializeApp } from "firebase/app";
@@ -22,4 +25,7 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const ingrediente = db.collection("Ingrediente");
 const producto = db.collection("Producto");
-module.exports = { producto,ingrediente} ;
+const familia = db.collection("Familia");
+const cliente = db.collection("Cliente");
+const pedido = db.collection("Pedido");
+module.exports = { producto,ingrediente,familia,cliente,pedido} ;
