@@ -94,6 +94,26 @@ app.get("/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
 
-  
+  app.get("/getCliente/:nit", async (req, res) => {
+    var nitCliente =req.params.nit 
+    //var nombreCliente =req.params.nombre 
+    console.log('Typeof nit: ',(typeof nitCliente));
+    nitCliente = parseInt(nitCliente, 10);
+    let query = await cliente.where('NIT', '==', nitCliente);
+    let querySnapshot = await query.get();
+    let respuesta = null;
+
+    if (querySnapshot.empty) {
+        console.log(`No encontramos al cliente con nit: ${nitCliente}`);
+       
+    } else {
+        console.log('Encontramos al nit: ',nitCliente);
+        const list = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        respuesta = list
+    }
+
+
+    res.send(respuesta);
+  });
 
 app.listen(4000,()=>console.log("Up and Running on 40000"))
