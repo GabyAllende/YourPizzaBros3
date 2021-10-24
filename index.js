@@ -95,7 +95,7 @@ app.get("/api/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
 
-  app.get("/api/getCliente/:nit", async (req, res) => {
+app.get("/api/getCliente/:nit", async (req, res) => {
     var nitCliente =req.params.nit 
     //var nombreCliente =req.params.nombre 
     console.log('Typeof nit: ',(typeof nitCliente));
@@ -117,7 +117,7 @@ app.get("/api/getIngrediente/:nombre", async (req, res) => {
     res.send(respuesta);
   });
   
-  app.get("/api/getFamilia/:nombre", async (req, res) => {
+app.get("/api/getFamilia/:nombre", async (req, res) => {
     var prd =req.params.nombre 
     
     let query = await familia.where('Nombre', '==', prd);
@@ -208,7 +208,8 @@ app.post("/api/postPedido", async(req,res)=>
     //   ],
     //   "NombreCliente":"Lopez",
     //   "NITCliente": 77777,
-    //   "IdEmpleado":"ABCRl949N5aptvF0M7vt"
+    //   "IdEmpleado":"ABCRl949N5aptvF0M7vt",
+    //   "Estado": "Entregado"
     // }
 
     //buscamos todos los productos de la lista
@@ -282,6 +283,7 @@ app.post("/api/postPedido", async(req,res)=>
     res.send({msg: "Pedido added","Pedido": newPedido})
 })
 
-
+//GetPedido segun el nombreCliente y estado
+//GetPedido entre 2 fechas
 
 app.listen(4000,()=>console.log("Up and Running on 40000"))
