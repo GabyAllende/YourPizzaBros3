@@ -28,4 +28,4 @@ const producto = db.collection("Producto");
 const familia = db.collection("Familia");
 const cliente = db.collection("Cliente");
 const pedido = db.collection("Pedido");
-module.exports = { producto,ingrediente,familia,cliente,pedido} ;
+module.exports = { producto,ingrediente,familia,cliente,pedido,firebase} ;
