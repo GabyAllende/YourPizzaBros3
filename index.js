@@ -1,13 +1,21 @@
 const express = require('express')
 const cors = require('cors')
-const ingrediente = require('./config')
+
+database = require('./config')
+const ingrediente = database.ingrediente;
+const producto = database.producto;
 //const { async } = require('@firebase/util')
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.get("/", async (req, res) => {
+app.get("/getIngrediente", async (req, res) => {
     const snapshot = await ingrediente.get();
+    const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    res.send(list);
+  });
+app.get("/getProducto", async (req, res) => {
+    const snapshot = await producto.get();
     const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     res.send(list);
   });

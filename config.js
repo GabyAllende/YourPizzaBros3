@@ -21,4 +21,5 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const ingrediente = db.collection("Ingrediente");
-module.exports = ingrediente;
+const producto = db.collection("Producto");
+module.exports = { producto,ingrediente} ;
